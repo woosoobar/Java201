@@ -30,7 +30,7 @@ public class SortTest {
 		o3.setUserId("belsnake2");
 		o3.setLastLiTime("2015-05-02 14:17:13");
 		
-		Map<Object, Oper> map = new HashMap<Object, Oper>();
+		Map<Object, Oper> map = new HashMap<>();
 //		Map<Object, Oper> sortedMap = new TreeMap<Object, Oper>();
 		NavigableMap<Object, Oper> sortedMap = new TreeMap<Object, Oper>();
 		
