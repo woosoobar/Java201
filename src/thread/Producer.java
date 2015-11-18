@@ -5,7 +5,7 @@ import java.util.Vector;
 public class Producer extends Thread {
 
 	static final int MAXQUEUE = 5;
-	private Vector messages = new Vector();
+	private Vector<String> messages = new Vector<>();
 
 	@Override
 	public void run() {

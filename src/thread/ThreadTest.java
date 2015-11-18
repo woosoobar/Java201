@@ -36,7 +36,7 @@ public class ThreadTest implements Runnable {
 		for (int i=0; i<threads.size(); i++) {
 			Thread t = threads.get(i);
 			try {
-				t.join();
+				//t.join();
 			} catch (Exception e) {
 				// TODO: handle exception
 			}

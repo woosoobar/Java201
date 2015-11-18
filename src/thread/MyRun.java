@@ -4,6 +4,7 @@ public class MyRun extends Thread {
 
     Bank bank;
     boolean in;
+    
     public MyRun(Bank bank, boolean in)
     {
         this.bank = bank;

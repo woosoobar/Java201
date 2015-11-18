@@ -21,6 +21,7 @@ public class BulkReadTest {
 			size = b.length;
 		}
 		
+		System.out.println("Posi : " + buf.position() + ", Limit : " + buf.limit() );
 		buf.get(b, 0, size);
 		System.out.println("Posi : " + buf.position() + ", Limit : " + buf.limit() );
 		

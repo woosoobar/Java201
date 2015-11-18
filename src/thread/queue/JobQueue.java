@@ -8,10 +8,11 @@ public class JobQueue implements Queue{
 	private static final String NAME = "JOB QUEUE";
 	private static final Object monitor = new Object();
 
-	private LinkedList jobs = new LinkedList();
+	private LinkedList<Object> jobs = new LinkedList<>();
 
 	// 싱글톤
 	private static JobQueue instance = new JobQueue();
+	
 	private JobQueue() {}
 
 	public static JobQueue getInstance() {
@@ -27,7 +28,7 @@ public class JobQueue implements Queue{
 		return NAME;
 	}
 
-	public LinkedList getLinkedList() {
+	public LinkedList<Object> getLinkedList() {
 		return jobs;
 	}
 
