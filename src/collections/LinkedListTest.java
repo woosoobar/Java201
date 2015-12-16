@@ -1,5 +1,7 @@
 package collections;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -15,10 +17,20 @@ public class LinkedListTest {
 //		for (String s : q) {
 //			System.out.println(s);
 //		}
+		System.out.println(q.remove());
+		System.out.println(q.poll());
+//		System.out.println(q.poll());
+//		System.out.println(q.poll());
+//		System.out.println(q.poll());
+//		System.out.println(q.size());
 		
-		System.out.println(q.poll());
-		System.out.println(q.poll());
-		System.out.println(q.poll());
-		System.out.println(q.poll());
+		
+		LinkedList<String> list = new LinkedList<>();
+		
+		list.add("ee");
+		list.add("bb");
+		list.add("cc");
+		list.clear();
+		System.out.println(list.size());
 	}
 }
