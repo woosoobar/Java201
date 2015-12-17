@@ -37,7 +37,7 @@ public class FutureExample implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		ExecutorService es = Executors.newFixedThreadPool(3);
+		ExecutorService es = Executors.newFixedThreadPool(10);
 		
 		List<Future<FutureExample>> tasks = new ArrayList<Future<FutureExample>>();
 		

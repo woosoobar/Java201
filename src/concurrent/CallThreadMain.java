@@ -38,19 +38,19 @@ public class CallThreadMain {
 		try {
 			//Future객체에서 get을 호출하면 바로 수행되는 것이 아니고 스레드가
 			//종료될때까지 블로킹되서 대기한 후 작업을 수행
-//			System.out.println("f1 : "+f1.get());
-//			System.out.println("f2: "+f2.get());
-//			System.out.println("f3: "+f3.get());
-//			System.out.println("f4: "+f4.get());
-//			System.out.println("f5: "+f5.get());
+			System.out.println("f1 : "+f1.get());
+			System.out.println("f2: "+f2.get());
+			System.out.println("f3: "+f3.get());
+			System.out.println("f4: "+f4.get());
+			System.out.println("f5: "+f5.get());
 		} 
-//		catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (ExecutionException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		finally {
 			
 		}

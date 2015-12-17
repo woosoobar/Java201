@@ -10,6 +10,8 @@ public class MyRun extends Thread {
         this.bank = bank;
         this.in = in;
     }
+    
+    @Override
     public void run()
     {
         if (in)
@@ -17,6 +19,7 @@ public class MyRun extends Thread {
         else
             bank.out();
     }
+    
     public static void main(String[] args) throws Exception {
         Bank bank = new Bank();
         MyRun m1 = new MyRun(bank, true);

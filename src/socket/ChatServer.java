@@ -5,15 +5,25 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Calendar;
 import java.util.StringTokenizer;
+import java.util.TimerTask;
 import java.util.Vector;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
 public class ChatServer {
 
-	Vector user = new Vector();
+	Vector<ChatService> user = new Vector<>();
 
+	private static ScheduledExecutorService scheduler;
+	private static long count = 0;
 	public ChatServer() {
 		ServerSocket server = null;
 		try{
@@ -21,8 +31,13 @@ public class ChatServer {
 			System.out.println("채팅 서버가 12000포트로 바운딩");
 		} catch(Exception ex) {
 			ex.printStackTrace();
-		} while(true) {
-			try{	
+		} 
+		
+		while (true) {
+			if (server.isClosed()) {
+				break;
+			}
+			try {	
 				Socket client = server.accept();
 				System.out.println(client);
 				ChatService cs = new ChatService(client);
@@ -35,12 +50,53 @@ public class ChatServer {
 				String id = st.nextToken();
 				cs.id = id;
 
-				// user리스트에 cs 추가
-				for(int i=0; i<user.size(); i++) {
-					// 모든 요소에 ID 전달
-					ChatService tempCs = (ChatService)user.elementAt(i);
-					tempCs.sendMessage("100|" + cs.id);
+				if (scheduler == null) {
+					scheduler = Executors.newSingleThreadScheduledExecutor();
+					scheduler.scheduleAtFixedRate(new TimerTask() {
+						@Override
+						public void run() {
+							for(int i=0; i<user.size(); i++) {
+								// 모든 요소에 ID 전달
+								Item item = new Item();
+						    	item.setSystem("SW");
+						    	item.setUpper("EAM");
+						    	item.setLower("HELLO");
+						    	item.setItem("HLRCS152A");
+						    	item.setLog("A1363 IPSP CONNECTION STATUS ALARM OCURRED\n"
+						    			+"A1363 IPSP CONNECTION STATUS ALARM OCURRED\n"
+						    			+"A1363 IPSP CONNECTION STATUS ALARM OCURRED\n"
+						    			+"A1363 IPSP CONNECTION STATUS ALARM OCURRED\n"
+						    			+"A1363 IPSP CONNECTION STATUS ALARM OCURRED\n"
+						    			+"A1363 IPSP CONNECTION STATUS ALARM OCURRED\n"
+						    			+"A1363 IPSP CONNECTION STATUS ALARM OCURRED\n");
+						    	Calendar today = Calendar.getInstance();
+						    	item.setDate(String.valueOf(today.getTimeInMillis()));
+						    	item.setGrade(""+count++);
+//						    	item.setBytes(bArr);
+						    	ObjectMapper omapper = new ObjectMapper();
+						    	String jsonStr = "";
+						    	try {
+						    		jsonStr = omapper.writeValueAsString(item);
+						    	} catch (JsonProcessingException e) {
+						    		// TODO Auto-generated catch block
+						    		e.printStackTrace();
+						    	}
+								
+								ChatService tempCs = (ChatService)user.elementAt(i);
+								tempCs.sendMessage("350|" + jsonStr);
+							}
+						}
+					}, 1000000L, 333L, TimeUnit.MICROSECONDS);
 				}
+//				
+				
+				// user리스트에 cs 추가
+//				for(int i=0; i<user.size(); i++) {
+//					// 모든 요소에 ID 전달
+//					ChatService tempCs = (ChatService)user.elementAt(i);
+//					tempCs.sendMessage("100|" + cs.id);
+//				}
+				
 				// user 리스트에 cs 추가
 				user.addElement(cs);
 
@@ -79,14 +135,14 @@ public class ChatServer {
 		public void run() {
 			String msg = " ";
 			try{
-				while(true) {
+				while (true && !socket.isClosed()) {
 					msg = input.readLine();   //300,400
 					if( msg == null || msg.length() <= 0 )
 						return;
 					StringTokenizer st = new StringTokenizer(msg, "|");
 					int protocol = Integer.parseInt(st.nextToken());
 
-					switch( protocol ) {
+					switch (protocol) {
 					case 300:   // 300|메세지
 						String str = st.nextToken();
 						sendMessageAll("300| " + id + ">" + str);
@@ -137,7 +193,7 @@ public class ChatServer {
 		//전체 사용자에게 전달할 내용
 		void sendMessageAll(String msg) {
 
-			for(int i=0; i<user.size(); i++) {
+			for (int i = 0; i < user.size(); i++) {
 				try{
 					ChatService tempCs = 
 							(ChatService)user.elementAt(i);

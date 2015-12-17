@@ -14,16 +14,16 @@ public class Tester {
 		con2.start();
 		con3.start();
 		
-//		Thread pro = new Thread(new Producer(q));
-//		pro.start();
-//		
-//		Thread.sleep(2);
-//		pro.interrupt();
+		Thread pro = new Thread(new Producer(q));
+		pro.start();
 		
 		Thread.sleep(2);
-//		con1.interrupt();
-//		con2.interrupt();
-//		con3.interrupt();
+		pro.interrupt();
+		
+		Thread.sleep(2);
+		con1.interrupt();
+		con2.interrupt();
+		con3.interrupt();
 		
 		System.out.println("[ End Main ]");
 	}

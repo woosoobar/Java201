@@ -6,11 +6,14 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class ChatBox implements ActionListener, Runnable {
 	Frame f;
 	TextArea ta;
 	Label serverL, idL;
-	TextField ipTf, idTf, tf;
+	TextField ipTf, idTf;
 	Button connBt, disBt;
 	java.awt.List joinLB;
 	Panel northP, inputP, labelP, btP, dummyP, connP;
@@ -18,7 +21,12 @@ public class ChatBox implements ActionListener, Runnable {
 	BufferedReader input;
 	PrintWriter output;
 	Socket socket;
-
+	
+	// NEW
+	Label inputL, countL;
+	TextField tf, countTF; 
+	Panel southLabelP, southInputP, southP;
+	
 	ChatBox() {
 		f = new Frame("Chatting Room");
 		ta = new TextArea();
@@ -27,16 +35,26 @@ public class ChatBox implements ActionListener, Runnable {
 		ipTf = new TextField(50);
 		ipTf.setText("10.10.105.89");
 		idTf = new TextField(50);
-		tf = new TextField();
+		
 		connBt = new Button(" Conn ");
 		disBt = new Button(" Out ");
 		joinLB = new java.awt.List();
-		northP = new Panel();
+		
 		inputP = new Panel(new GridLayout(2, 1));
 		btP = new Panel(new GridLayout(2, 1));
 		labelP = new Panel(new GridLayout(2, 1));
 		dummyP = new Panel();
+		northP = new Panel();
 		connP = new Panel(new GridLayout(1, 2));
+		
+		// NEW
+		inputL = new Label(" INPUT : ");
+		countL = new Label(" COUNT : ");
+		tf = new TextField(50);
+		countTF = new TextField(25);
+		southLabelP = new Panel(new GridLayout(2, 1));
+		southInputP = new Panel(new GridLayout(2, 1));
+		southP = new Panel();
 
 		init();
 		componentSetting();
@@ -62,10 +80,23 @@ public class ChatBox implements ActionListener, Runnable {
 		northP.add("Center",inputP);
 		northP.add("East", btP);
 
+		
 		f.add("Center", ta);
 		f.add("North", northP);
-		f.add("South", tf);
 		f.add("East", joinLB);
+		
+		// NEW
+		southLabelP.add(inputL);
+		southLabelP.add(countL);
+		southInputP.add(tf);
+		southInputP.add(countTF);
+		
+		southP.add("West", southLabelP);
+		southP.add("Center", southInputP);
+		
+		f.add("South", southP);
+		
+		
 
 		f.setSize(600, 480);
 		f.setLocation((int)(dim.getWidth() / 2) - f.getWidth() / 2,
@@ -176,7 +207,7 @@ public class ChatBox implements ActionListener, Runnable {
 		try {
 			joinLB.add("모두에게");
 			joinLB.select(0);
-			while (true) {
+			while (true && !socket.isClosed()) {
 				String str = input.readLine();
 				if (str == null || str.length() <= 0)
 					return;
@@ -195,6 +226,22 @@ public class ChatBox implements ActionListener, Runnable {
 					break;
 				case 300 :
 					ta.append(st.nextToken() + "\n\r");            		    
+					break;
+				case 350 :
+					String jsonStr = st.nextToken();
+					ObjectMapper omapper = new ObjectMapper();
+					Item item = null;
+			    	try {
+			    		 item = omapper.readValue(jsonStr, Item.class);
+			    	} catch (JsonProcessingException e) {
+			    		// TODO Auto-generated catch block
+			    		e.printStackTrace();
+			    	}
+			    	if (item != null) {
+			    		countTF.setText(item.getGrade());            		    
+			    	} else {
+			    		countTF.setText("Empty !!");            		    
+			    	}
 					break;
 				case 400 :
 					ta.append(st.nextToken() + "\n\r");
