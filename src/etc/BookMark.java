@@ -5,6 +5,13 @@ public class BookMark {
 	// jQuery에서의 Deferred와 Promise 
 	private String bm1 = "http://blog.naver.com/PostView.nhn?blogId=sef16&logNo=70167177129";
 	
+	// ANSI
+	
+	
+	//STS 에서 gradle build 오류 처리. (JAVA_HOME 어쩌고저쩌고)
+	private String gberr = "http://blog.naver.com/mudice/220091870632";
+	
+	private String mime = "http://www.emh.co.kr/content.pl?mime";
 
 	/*
 	1. jQuery 1.5 이전에는
