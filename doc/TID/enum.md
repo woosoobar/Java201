@@ -220,21 +220,22 @@ public final Object clone() throws CloneNotSupportedException
 protected final void finalize()
 ```
 
-`toString()`과 `name()`은 사실 같은 역할을 하는데 둘의 차이는 Override가 가능한가 불가능한가의 차이이다. 이는 final에 의해 발생하는 차이이다.
+`toString()`과 `name()`은 사실 같은 역할을 하는데 둘의 차이는 Override가 가능한가 불가능한가의 차이이다.  
+이는 final에 의해 발생하는 차이이다.
 
-+ <b>name( )</b>
++ <b>name( )</b>  
 열거형 상수의 이름을 문자열로 반환한다.
-+ <b>ordinal( )</b>
++ <b>ordinal( )</b>  
 열거형 상수가 정의된 순서(0부터 시작)를 정수로 반환한다.
-+ <b>toString( )</b>
++ <b>toString( )</b>  
 열거형 상수의 이름을 문자열로 반환한다.
-+ <b>compareTo( )</b>
++ <b>compareTo( )</b>  
 정렬의 기준을 위한 메서드로 비교 대상보다 순서가 빠르면 -1, 같으면 0, 느리면 1을 반환한다.
-+ <b>valueOf(enumType, name)</b>
++ <b>valueOf(enumType, name)</b>  
 지정된 열거형에서 name과 일치하는 열거형 상수를 반환한다.
-+ <b>getDeclaringClass( )</b>
++ <b>getDeclaringClass( )</b>  
 열거형의 Class 객체를 반환한다.
-+ <b>values( )</b>
++ <b>values( )</b>  
 열거형의 모든 상수를 배열에 담아 반환한다.
 
 ### java.lang.Enum
@@ -326,22 +327,22 @@ EnumSet은 모든 메소드가 static 키워드를 사용하여 정의되어 있
 [API 문서](https://docs.oracle.com/javase/8/docs/api/java/util/EnumSet.html)를 보면  
 알 수 있듯이 이 클래스는 abstract 키워드를 사용한 추상 클래스이기 때문이다.
 
-+ <b>allOf(Class<E> elementType)</b>
-지정한 Type의 모든 원소를 포함하는 EnumSet을 만든다.
-+ <b>clone()</b>
-이 집합의 복사본을 반환한다.
-+ <b>complementOf(EnumSet<E> s)</b>
-지정한 EnumSet에 포함되지 않은 원소만 갖는 동일한 Type의 EnumSet을 만든다.
-+ <b>copyOf(Collection<E> c)</b>
-지정한 Collection에서 초기화된 EnumSet을 만든다.
-+ <b>copyOf(EnumSet<E> s)</b>
-지정한 EnumSet과 동일한 Type을 가진 EnumSet을 만든다. 이 때, 처음과 동일한 원소(원소가 있는 경우)를 포함한다.
-+ <b>noneOf(Class<E> elementType)</b>
-지정한 Type을 가지는 빈 EnumSet을 만든다.
-+ <b>of(E e)</b>, of(E first, E... rest), of(E e1, E e2)
-지정한 원소(또는 원소들)를 포함하는 EnumSet을 만든다.
-+ <b>range(E from, E to)</b>
-지정된 두 원소 사이에 있는 모든 원소를 포함하는 EnumSet을 만든다.
++ <b>allOf(Class<E> elementType)</b>  
+    지정한 Type의 모든 원소를 포함하는 EnumSet을 만든다.
++ <b>clone()</b>  
+    이 집합의 복사본을 반환한다.
++ <b>complementOf(EnumSet<E> s)</b>  
+    지정한 EnumSet에 포함되지 않은 원소만 갖는 동일한 Type의 EnumSet을 만든다.
++ <b>copyOf(Collection<E> c)</b>  
+    지정한 Collection에서 초기화된 EnumSet을 만든다.
++ <b>copyOf(EnumSet<E> s)</b>  
+    지정한 EnumSet과 동일한 Type을 가진 EnumSet을 만든다. 이 때, 처음과 동일한 원소(원소가 있는 경우)를 포함한다.
++ <b>noneOf(Class<E> elementType)</b>  
+    지정한 Type을 가지는 빈 EnumSet을 만든다.
++ <b>of(E e)</b>, of(E first, E... rest), of(E e1, E e2)  
+    지정한 원소(또는 원소들)를 포함하는 EnumSet을 만든다.
++ <b>range(E from, E to)</b>  
+    지정된 두 원소 사이에 있는 모든 원소를 포함하는 EnumSet을 만든다.
 
 &#9654; EnumSet 예제
 
