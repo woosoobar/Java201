@@ -223,25 +223,26 @@ protected final void finalize()
 `toString()`과 `name()`은 사실 같은 역할을 하는데 둘의 차이는 Override가 가능한가 불가능한가의 차이이다. 이는 final에 의해 발생하는 차이이다.
 
 + <b>name( )</b>
-  + 열거형 상수의 이름을 문자열로 반환한다.
+열거형 상수의 이름을 문자열로 반환한다.
 + <b>ordinal( )</b>
-  + 열거형 상수가 정의된 순서(0부터 시작)를 정수로 반환한다.
+열거형 상수가 정의된 순서(0부터 시작)를 정수로 반환한다.
 + <b>toString( )</b>
-  + 열거형 상수의 이름을 문자열로 반환한다.
+열거형 상수의 이름을 문자열로 반환한다.
 + <b>compareTo( )</b>
-  + 정렬의 기준을 위한 메서드로 비교 대상보다 순서가 빠르면 -1, 같으면 0, 느리면 1을 반환한다.
+정렬의 기준을 위한 메서드로 비교 대상보다 순서가 빠르면 -1, 같으면 0, 느리면 1을 반환한다.
 + <b>valueOf(enumType, name)</b>
-  + 지정된 열거형에서 name과 일치하는 열거형 상수를 반환한다.
+지정된 열거형에서 name과 일치하는 열거형 상수를 반환한다.
 + <b>getDeclaringClass( )</b>
-  + 열거형의 Class 객체를 반환한다.
+열거형의 Class 객체를 반환한다.
 + <b>values( )</b>
-  + 열거형의 모든 상수를 배열에 담아 반환한다.
+열거형의 모든 상수를 배열에 담아 반환한다.
 
-# java.lang.Enum
+### java.lang.Enum
+&nbsp;&nbsp;&nbsp;모든 열거 타입은 컴파일 시 java.lang.Enum 클래스를 상속받는다.  
+따라서 단일 상속만 허용되는 자바이기 때문에 enum은 별도의 상속을 받을 수 없다.
 
-&nbsp;&nbsp;&nbsp;모든 열거 타입은 컴파일 시 java.lang.Enum 클래스를 상속받는다. 따라서 단일 상속만 허용되는 자바이기 때문에 enum은 별도의 상속을 받을 수 없다.
-
-java.lang.Enum 클래스도 최고조상인 Object클래스를 상속받는데, 대부분은 final이어서 Override할 수 없지만 toString 메소드는 final이 아니어서 사용할 수 있다.
+java.lang.Enum 클래스도 최고조상인 Object클래스를 상속받는데, 대부분은 final이어서  
+Override할 수 없지만 toString 메소드는 final이 아니어서 사용할 수 있다.
 
 ```java
 package java.lang;
@@ -316,28 +317,31 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializ
 }
 ```
 
-## EnumSet
+### EnumSet
+&nbsp;&nbsp;&nbsp;EnumSet은 Set 인터페이스를 기반으로 열거형 타입으로 지정해놓은  
+요소들을 보다 빠르게 배열처럼 다룰수 있는 기능을 제공한다.
 
-&nbsp;&nbsp;&nbsp;EnumSet은 Set 인터페이스를 기반으로 열거형 타입으로 지정해놓은 요소들을 보다 빠르게 배열처럼 다룰수 있는 기능을 제공한다.
-
-EnumSet은 모든 메소드가 static 키워드를 사용하여 정의되어 있기 때문에 별도의 객체 생성없이 사용할 수 있다고 하는데 사실은 객체를 생성할 수 없는 것이다. [API 문서](https://docs.oracle.com/javase/8/docs/api/java/util/EnumSet.html)를 보면 알 수 있듯이 이 클래스는 abstract 키워드를 사용한 추상 클래스이기 때문이다.
+EnumSet은 모든 메소드가 static 키워드를 사용하여 정의되어 있기 때문에 별도의 객체 생성없이  
+사용할 수 있다고 하는데 사실은 객체를 생성할 수 없는 것이다.  
+[API 문서](https://docs.oracle.com/javase/8/docs/api/java/util/EnumSet.html)를 보면  
+알 수 있듯이 이 클래스는 abstract 키워드를 사용한 추상 클래스이기 때문이다.
 
 + <b>allOf(Class<E> elementType)</b>
-  + 지정한 Type의 모든 원소를 포함하는 EnumSet을 만든다.
+지정한 Type의 모든 원소를 포함하는 EnumSet을 만든다.
 + <b>clone()</b>
-  + 이 집합의 복사본을 반환한다.
+이 집합의 복사본을 반환한다.
 + <b>complementOf(EnumSet<E> s)</b>
-  + 지정한 EnumSet에 포함되지 않은 원소만 갖는 동일한 Type의 EnumSet을 만든다.
+지정한 EnumSet에 포함되지 않은 원소만 갖는 동일한 Type의 EnumSet을 만든다.
 + <b>copyOf(Collection<E> c)</b>
-  + 지정한 Collection에서 초기화된 EnumSet을 만든다.
+지정한 Collection에서 초기화된 EnumSet을 만든다.
 + <b>copyOf(EnumSet<E> s)</b>
-  + 지정한 EnumSet과 동일한 Type을 가진 EnumSet을 만든다. 이 때, 처음과 동일한 원소(원소가 있는 경우)를 포함한다.
+지정한 EnumSet과 동일한 Type을 가진 EnumSet을 만든다. 이 때, 처음과 동일한 원소(원소가 있는 경우)를 포함한다.
 + <b>noneOf(Class<E> elementType)</b>
-  + 지정한 Type을 가지는 빈 EnumSet을 만든다.
+지정한 Type을 가지는 빈 EnumSet을 만든다.
 + <b>of(E e)</b>, of(E first, E... rest), of(E e1, E e2)
-  + 지정한 원소(또는 원소들)를 포함하는 EnumSet을 만든다.
+지정한 원소(또는 원소들)를 포함하는 EnumSet을 만든다.
 + <b>range(E from, E to)</b>
-  + 지정된 두 원소 사이에 있는 모든 원소를 포함하는 EnumSet을 만든다.
+지정된 두 원소 사이에 있는 모든 원소를 포함하는 EnumSet을 만든다.
 
 &#9654; EnumSet 예제
 
