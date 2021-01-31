@@ -48,9 +48,8 @@ class Card {
 
 열거형 상수는 상수의 값이 바뀌어도 기존의 소스를 다시 컴파일하지 않아도 된다는 장점이 있다.
 
-## 열거형의 정의
-
-&nbsp;&nbsp;&nbsp;기본적으로 상수명은 대문자로 작성하고, 여러 단어일 경우 언더바로 이어주는 것이 관례이다.
+### 열거형의 정의
+기본적으로 상수명은 대문자로 작성하고, 여러 단어일 경우 언더바로 이어주는 것이 관례이다.
 
 &#9654; 기본적인 열거형의 정의
 
@@ -108,7 +107,7 @@ class Card {
 switch문의 조건식으로 열거형을 사용할 수 있다. 이 때 주의할 점은 case문에 열거형의 이름은 적지 않고 상수의 이름만 적어야 한다는 제약이 있다.
 
 
-## 열거형의 사용
+### 열거형의 사용
 
 &#9654; App.java
 
@@ -206,7 +205,7 @@ public enum Nasdaq {
 
 <img src="/assets/img/study/enum03.png" width="70%" align="center"><br/>
 
-# enum이 제공하는 메소드
+### enum이 제공하는 메소드
 
 ```java
 public final String name()
@@ -317,7 +316,7 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializ
 }
 ```
 
-# EnumSet
+## EnumSet
 
 &nbsp;&nbsp;&nbsp;EnumSet은 Set 인터페이스를 기반으로 열거형 타입으로 지정해놓은 요소들을 보다 빠르게 배열처럼 다룰수 있는 기능을 제공한다.
 
